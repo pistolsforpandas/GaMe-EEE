@@ -1,4 +1,4 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +6,7 @@ public class AddPlayerControlVelocity : MonoBehaviour
 {
     public Rigidbody rigidBody;
     public float torque;
-    [SerializeField]
-    Vector3 v3ForceForwardBack;
-    [SerializeField]
-    Vector3 v3ForceLeftRight;
+
     [SerializeField]
     Vector3 v3RotationSpeed;
     [SerializeField]
@@ -17,14 +14,11 @@ public class AddPlayerControlVelocity : MonoBehaviour
     [SerializeField]
     KeyCode keyBackwards;
     [SerializeField]
-    KeyCode keyRight;
-    [SerializeField]
     KeyCode keyLeft;
     [SerializeField]
-    KeyCode keyRLeft;
+    KeyCode keyRight;
     [SerializeField]
-    KeyCode keyRRight;
-    Vector3 movement;
+    Vector3 speed;
 
     //Make sure you attach a Rigidbody in the Inspector of this GameObject
     Rigidbody m_Rigidbody;
@@ -39,40 +33,43 @@ public class AddPlayerControlVelocity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+
+        /*Vector3 movement = rigidBody.transform.rotation * speed;
 
         if (Input.GetKey(keyForward))
-            rigidBody.velocity += v3ForceForwardBack;
+            rigidBody.AddForce(rigidBody.velocity += movement);
 
-            if (Input.GetKey(keyBackwards))
-            rigidBody.velocity -= v3ForceForwardBack;
+        if (Input.GetKey(keyBackwards))
+            rigidBody.AddForce(rigidBody.velocity -= movement);*/
 
-           
 
-        if (Input.GetKey(keyRight))
-            rigidBody.velocity += v3ForceLeftRight;
+        //We dont even need left/right movement, just rotate
+        /* if (Input.GetKey(keyRight))
+             rigidBody.velocity += v3ForceLeftRight;
+
+
+         if (Input.GetKey(keyLeft))
+             rigidBody.velocity -= v3ForceLeftRight;*/
+
+
+
 
 
         if (Input.GetKey(keyLeft))
-            rigidBody.velocity -= v3ForceLeftRight;
-
-        
-
-
-
-        if (Input.GetKey(keyRLeft))
         {
-
-            *//*Quaternion deltaRotation = Quaternion.Euler(-v3RotationSpeed * Time.deltaTime);
-            rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);*//*
-            rigidBody.MoveRotation(Quaternion.LookRotation(movement));
+            //wtf is a Quaternion?
+            Quaternion deltaRotation = Quaternion.Euler(-v3RotationSpeed * Time.deltaTime);
+            rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+            
+            
 
         }
-        else if (Input.GetKey(keyRRight))
+        else if (Input.GetKey(keyRight))
         {
-           
+
             Quaternion deltaRotation = Quaternion.Euler(v3RotationSpeed * Time.deltaTime);
             rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+            
         }
 
 
@@ -82,4 +79,4 @@ public class AddPlayerControlVelocity : MonoBehaviour
 
 
     }
-}*/
+}
